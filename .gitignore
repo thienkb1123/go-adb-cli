@@ -1,0 +1,28 @@
+# Ignore build output directory
+build/
+
+# Ignore IDE config files/directories
+.idea/
+
+# Ignore Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Ignore temporary files
+*.log
+*.tmp
+*.out
+
+# Ignore Go module cache
+vendor/
+
+# Ignore editor swap files
+*~
+*.swp
+
+# Ignore test coverage files
+coverage.out 
