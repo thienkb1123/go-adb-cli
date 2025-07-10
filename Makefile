@@ -51,6 +51,14 @@ build-all: clean
 	
 	@echo "Multi-platform build completed!"
 
+# Build for Windows (amd64) only
+.PHONY: build-windows
+build-windows:
+	@echo "Building for Windows (amd64)..."
+	@mkdir -p $(BUILD_DIR)
+	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe $(MAIN_PATH)
+	@echo "Build completed: $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe"
+
 # Build with debug information
 .PHONY: build-debug
 build-debug:

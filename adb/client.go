@@ -2,7 +2,10 @@ package adb
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"os"
+	"path/filepath"
 	"os/exec"
 	"strings"
 	"time"
@@ -51,6 +54,29 @@ func NewClient(opts ...Option) *Client {
 		opt(c)
 	}
 	return c
+}
+
+// NewClientFromConfig creates a client from the config file ~/.go-adb-cli.json
+func NewClientFromConfig() *Client {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return NewClient()
+	}
+	configPath := filepath.Join(home, ".go-adb-cli.json")
+	f, err := os.Open(configPath)
+	if err != nil {
+		return NewClient()
+	}
+	defer f.Close()
+	var cfg struct {
+		Path string `json:"path"`
+		Host string `json:"host"`
+		Port int    `json:"port"`
+	}
+	if err := json.NewDecoder(f).Decode(&cfg); err != nil {
+		return NewClient()
+	}
+	return NewClient(WithPath(cfg.Path), WithHost(cfg.Host), WithPort(cfg.Port))
 }
 
 // ListDevices returns a list of connected ADB devices

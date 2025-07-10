@@ -20,7 +20,7 @@ var installAppCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		apkPath := args[0]
-		client := adb.NewClient()
+		client := adb.NewClientFromConfig()
 
 		fmt.Printf("Installing %s...\n", apkPath)
 		output, err := client.InstallApk(apkPath)
@@ -40,7 +40,7 @@ var uninstallAppCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		packageName := args[0]
-		client := adb.NewClient()
+		client := adb.NewClientFromConfig()
 
 		fmt.Printf("Uninstalling %s...\n", packageName)
 		output, err := client.UninstallApp(packageName)
@@ -58,7 +58,7 @@ var listAppsCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List installed apps",
 	Run: func(cmd *cobra.Command, args []string) {
-		client := adb.NewClient()
+		client := adb.NewClientFromConfig()
 
 		output, err := client.Shell("pm list packages")
 		if err != nil {

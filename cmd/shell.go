@@ -21,7 +21,7 @@ var executeShellCmd = &cobra.Command{
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		command := args[0]
-		client := adb.NewClient()
+		client := adb.NewClientFromConfig()
 
 		fmt.Printf("Executing: %s\n", command)
 		output, err := client.Shell(command)
@@ -42,7 +42,7 @@ var pushFileCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		localPath := args[0]
 		remotePath := args[1]
-		client := adb.NewClient()
+		client := adb.NewClientFromConfig()
 
 		fmt.Printf("Pushing %s to %s...\n", localPath, remotePath)
 		output, err := client.RunCommand(context.Background(), "push", localPath, remotePath)
@@ -63,7 +63,7 @@ var pullFileCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		remotePath := args[0]
 		localPath := args[1]
-		client := adb.NewClient()
+		client := adb.NewClientFromConfig()
 
 		fmt.Printf("Pulling %s to %s...\n", remotePath, localPath)
 		output, err := client.RunCommand(context.Background(), "pull", remotePath, localPath)
