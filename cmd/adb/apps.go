@@ -1,4 +1,4 @@
-package cmd
+package adb
 
 import (
 	"fmt"
@@ -75,5 +75,5 @@ func init() {
 	appsCmd.AddCommand(installAppCmd)
 	appsCmd.AddCommand(uninstallAppCmd)
 	appsCmd.AddCommand(listAppsCmd)
-	rootCmd.AddCommand(appsCmd)
+	AdbCmd.AddCommand(appsCmd)
 }

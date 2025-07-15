@@ -1,4 +1,4 @@
-package cmd
+package adb
 
 import (
 	"context"
@@ -61,5 +61,5 @@ var connectDeviceCmd = &cobra.Command{
 func init() {
 	devicesCmd.AddCommand(listDevicesCmd)
 	devicesCmd.AddCommand(connectDeviceCmd)
-	rootCmd.AddCommand(devicesCmd)
+	AdbCmd.AddCommand(devicesCmd)
 }

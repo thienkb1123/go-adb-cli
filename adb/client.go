@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -105,6 +105,8 @@ func (c *Client) ListDevices() ([]string, error) {
 // RunCommand executes an adb command with arguments
 func (c *Client) RunCommand(ctx context.Context, args ...string) (string, error) {
 	cmd := exec.CommandContext(ctx, c.path, args...)
+	fmt.Printf("ADB Path: [%q]\n", c.path)
+	fmt.Printf("Args: %v\n", args)
 	out, err := cmd.CombinedOutput()
 	return string(out), err
 }

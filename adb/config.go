@@ -2,6 +2,7 @@ package adb
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -29,10 +30,11 @@ func LoadConfig() (Config, error) {
 }
 
 func SaveConfig(cfg Config) error {
+	fmt.Println("Saving config:", ConfigPath())
 	f, err := os.Create(ConfigPath())
 	if err != nil {
 		return err
 	}
 	defer f.Close()
 	return json.NewEncoder(f).Encode(cfg)
-} 
+}

@@ -1,4 +1,4 @@
-package cmd
+package adb
 
 import (
 	"context"
@@ -81,5 +81,5 @@ func init() {
 	shellCmd.AddCommand(executeShellCmd)
 	shellCmd.AddCommand(pushFileCmd)
 	shellCmd.AddCommand(pullFileCmd)
-	rootCmd.AddCommand(shellCmd)
+	AdbCmd.AddCommand(shellCmd)
 }
